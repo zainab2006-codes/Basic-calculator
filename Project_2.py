@@ -11,9 +11,10 @@ def show_history():
     lines = file_open.readlines()
 
     if (len(lines)==0):
-        print('No history found !')
+        print('\nNo history found !')
     else:
         for line in lines:
+            print()
             print(line.strip())
 
     file_open.close()
@@ -24,13 +25,15 @@ def clear_history():
     clear = open(file , 'w')
     clear.close()
 
-    print('History cleared !')
+    print('\nHistory cleared !')
 
 # file to save history
 
 def save_history(equation , output):
     open_file = open(file , 'a')
     open_file.write(equation + '=' + str(output) + '\n')
+
+    print('\nHistory saved.')
 
     open_file.close()
 
@@ -54,35 +57,35 @@ def calculation(equation):
         output = num_1 * num_2
     elif (operator == '/'):
         if num_2 == 0:
-            print('Error! \nDivision by zero not possible')
-            return
+            print('\nError! \nDivision by zero not possible')
+            return None
         else:
             output = num_1 / num_2
     else:
-        print('Invalid operator entered. Clculator only supports +,-,*,and /')
+        print('\nInvalid operator entered. Clculator only supports +,-,*,and /')
         return
     
-    print(output)
+    print('\nOutput:' , output)
     return output
 
 def main():
-    print("======Simple Calculator======")
+    print("\n======Simple Calculator======")
 
     inpi = ''
     output = None
 
     while True:
-        inp = input('Enter command (save,history,clear,exit,calculate): ').lower()
+        inp = input('\nEnter command (save,history,clear,exit,calculate): ').lower()
         
         if (inp == 'exit'):
-            print("Calculator closed.")
+            print("\nCalculator closed.")
             break
         elif (inp == 'calculate'):
-            inpi = input('Enter equation: ')
+            inpi = input('\nEnter equation: ')
             output = calculation(inpi)
         elif (inp == 'save'):
             if output is None:
-                print("No calculation to save!")
+                print("\nNo calculation to save!")
             else:
                 save_history(inpi, output)
         elif (inp == 'history'):
